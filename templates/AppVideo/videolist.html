@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title_block %} StreamZone {% endblock %}
+{% block body_block %}
+{% comment %} for loop here {% endcomment %}
+{% for video in videos %}
+<div class="card mb-3 m-auto" style="max-width: 840px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+        <iframe width="280" height="180" src="{{video.videoURL}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ video.title }}</h5>
+        {% comment %} <p class="card-text">{{ video.blog_content|linebreaks }}</p> {% endcomment %}
+        <a href="{% url 'AppVideo:videodetails' %}">Show details</a>
+        {% comment %} <a href="#">Show details</a> {% endcomment %}
+        <p class="card-text"><small class="text-muted">Last updated {{ video.upload_date }}</small></p>
+           <h6>Posted By: <a href="{% url 'AppLogin:profile' %}">@{{video.uploader}}</a></h6>
+    <h6>{{video.liked_video.count}} Likes | {{video.video_comment.count }} Comments </h6>
+      </div>
+    </div>
+  </div>  
+</div>
+<br>
+{% endfor %}
+{% endblock body_block %}

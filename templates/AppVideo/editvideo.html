@@ -1,0 +1,18 @@
+{% comment %} {% extends 'base.html' %}
+{% block title_block %} Edit posted video {% endblock %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+
+
+{% if video.uploader == user %}
+<form method="POST" enctype="multipart/form-data">
+{{form|crispy}}
+{% csrf_token %}
+<button type="submit" name="button">Update</button>
+{% else %}
+<p>Your are not allowed to view this page. 404</p>
+</form>
+{% endif %}
+
+
+{% endblock %} {% endcomment %}
